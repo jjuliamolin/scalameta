@@ -50,13 +50,13 @@ class InteractiveSuite extends FunSuite {
         |  Nothing => scala/Nothing#
         |
         |Occurrences:
-        |[0:8..0:9): b <= b/
+        |[0:8..0:9): b <= b/ enclosing [0:0..5:1)
         |[1:7..1:12): scala => scala/
         |[1:13..1:23): concurrent => scala/concurrent/
         |[1:24..1:30): Future => scala/concurrent/Future#
         |[1:24..1:30): Future => scala/concurrent/Future.
-        |[2:7..2:8): a <= b/a.
-        |[3:6..3:7): x <= b/a.x.
+        |[2:7..2:8): a <= b/a. enclosing [2:0..5:1)
+        |[3:6..3:7): x <= b/a.x. enclosing [3:2..3:29)
         |$listOccurences
         |[4:2..4:3): x => b/a.x.
         |[4:4..4:5): + => scala/Predef.any2stringadd#`+`().
@@ -129,9 +129,9 @@ class InteractiveSuite extends FunSuite {
        |_empty_/b.add().(a) => param a
        |
        |Occurrences:
-       |[1:7..1:8): b <= _empty_/b.
-       |[2:6..2:9): add <= _empty_/b.add().
-       |[2:10..2:11): a <= _empty_/b.add().(a)
+       |[1:7..1:8): b <= _empty_/b. enclosing [1:0..3:1)
+       |[2:6..2:9): add <= _empty_/b.add(). enclosing [2:2..2:20)
+       |[2:10..2:11): a <= _empty_/b.add().(a) enclosing [2:10..2:15)
        |[2:13..2:15): In => local0
        |
        |Diagnostics:

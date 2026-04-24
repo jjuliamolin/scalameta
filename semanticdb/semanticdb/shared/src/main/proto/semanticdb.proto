@@ -389,6 +389,7 @@ message SymbolOccurrence {
   Range range = 1;
   string symbol = 2;
   Role role = 3;
+  Range enclosing_range = 4;
 }
 
 message Diagnostic {

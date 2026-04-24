@@ -55,17 +55,17 @@ class Source3Suite extends FunSuite {
        |  String => scala/Predef.String#
        |
        |Occurrences:
-       |[0:8..0:9): b <= b/
+       |[0:8..0:9): b <= b/ enclosing [0:0..6:1)
        |[1:7..1:12): scala => scala/
        |[1:13..1:23): concurrent => scala/concurrent/
        |[1:24..1:30): Future => scala/concurrent/Future#
        |[1:24..1:30): Future => scala/concurrent/Future.
-       |[2:7..2:8): a <= b/a.
-       |[3:6..3:10): func <= b/a.func().
-       |[3:11..3:15): args <= b/a.func().(args)
+       |[2:7..2:8): a <= b/a. enclosing [2:0..6:1)
+       |[3:6..3:10): func <= b/a.func(). enclosing [3:2..3:31)
+       |[3:11..3:15): args <= b/a.func().(args) enclosing [3:11..3:24)
        |[3:17..3:23): String => java/lang/String#
        |[3:28..3:31): ??? => scala/Predef.`???`().
-       |[4:6..4:10): args <= b/a.args.
+       |[4:6..4:10): args <= b/a.args. enclosing [4:2..4:31)
        |[4:13..4:17): List => scala/package.List.
        |[4:18..4:23): empty => scala/collection/immutable/List.empty().
        |[4:24..4:30): String => scala/Predef.String#

@@ -50,22 +50,22 @@ class TargetedSuite extends SemanticdbSuite {
        |  assert(x.value == "Foo")
        |}
        |""".stripMargin,
-    """|[0:8..0:9): e <= e/
+    """|[0:8..0:9): e <= e/ enclosing [0:0..9:1)
        |[1:7..1:12): scala => scala/
        |[1:13..1:17): meta => scala/meta/
        |[2:7..2:12): munit => munit/
-       |[3:7..3:8): x <= e/x.
+       |[3:7..3:8): x <= e/x. enclosing [3:0..9:1)
        |[3:17..3:25): FunSuite => munit/FunSuite#
        |[3:26..3:26):  => munit/FunSuite#`<init>`().
-       |[4:6..4:7): x <= e/x.x.
+       |[4:6..4:7): x <= e/x.x. enclosing [4:2..4:16)
        |[4:10..4:11): q => scala/meta/internal/quasiquotes/Unlift.
-       |[5:6..5:7): y <= e/x.y.
+       |[5:6..5:7): y <= e/x.y. enclosing [5:2..5:16)
        |[5:10..5:11): q => scala/meta/internal/quasiquotes/Unlift.
-       |[6:6..6:7): z <= e/x.z.
+       |[6:6..6:7): z <= e/x.z. enclosing [6:2..6:20)
        |[6:10..6:11): q => scala/meta/internal/quasiquotes/Unlift.
        |[6:13..6:14): x => e/x.x.
        |[6:18..6:19): y => e/x.y.
-       |[7:6..7:7): k <= e/x.k.
+       |[7:6..7:7): k <= e/x.k. enclosing [7:2..7:34)
        |[7:10..7:20): sourcecode => sourcecode/
        |[7:21..7:25): Name => sourcecode/Name.
        |[7:26..7:34): generate => sourcecode/NameMacros#generate().
@@ -283,12 +283,12 @@ class TargetedSuite extends SemanticdbSuite {
          |[0:1..0:11): deprecated => scala/deprecated#
          |[0:11..0:11):  => scala/deprecated#`<init>`().
          |[0:12..0:17): since => scala/deprecated#`<init>`().(since)
-         |[1:6..1:9): CLS <= _empty_/CLS#
-         |[1:9..1:9):  <= _empty_/CLS#`<init>`().
-         |[1:10..1:14): name <= _empty_/CLS#name.
+         |[1:6..1:9): CLS <= _empty_/CLS# enclosing [1:0..3:1)
+         |[1:9..1:9):  <= _empty_/CLS#`<init>`(). enclosing [1:9..1:22)
+         |[1:10..1:14): name <= _empty_/CLS#name. enclosing [1:10..1:22)
          |[1:16..1:22): String => scala/Predef.String#
-         |[2:6..2:10): this <= _empty_/CLS#`<init>`(+1).
-         |[2:11..2:16): name2 <= _empty_/CLS#`<init>`(+1).(name2)
+         |[2:6..2:10): this <= _empty_/CLS#`<init>`(+1). enclosing [2:2..2:52)
+         |[2:11..2:16): name2 <= _empty_/CLS#`<init>`(+1).(name2) enclosing [2:11..2:21)
          |[2:18..2:21): Int => scala/Int#
          |[2:29..2:29):  => _empty_/CLS#`<init>`().
          |[2:30..2:34): name => _empty_/CLS#`<init>`().(name)
@@ -366,8 +366,8 @@ class TargetedSuite extends SemanticdbSuite {
            |  Unit => scala/Unit#
            |
            |Occurrences:
-           |[0:6..0:19): AmbiguousMend <= _empty_/AmbiguousMend#
-           |[1:6..1:7): x <= _empty_/AmbiguousMend#x().
+           |[0:6..0:19): AmbiguousMend <= _empty_/AmbiguousMend# enclosing [0:0..2:1)
+           |[1:6..1:7): x <= _empty_/AmbiguousMend#x(). enclosing [1:2..1:7)
            |""".stripMargin
       )
     }

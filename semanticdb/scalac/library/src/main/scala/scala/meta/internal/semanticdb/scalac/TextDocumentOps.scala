@@ -73,6 +73,7 @@ trait TextDocumentOps {
       // Occurrences for names in val patterns, like `val (a, b) =`. Unlike the `occurrences` map, val pattern
       // occurrences uses "last occurrence wins" instead of "first occurrences wins" when disambiguating between
       // multiple symbols that resolve to the same position.
+      val defTreeRanges = mutable.Map.empty[Int, s.Range]
       val mpatoccurrences = emptyOccurrenceMap()
       val mvalpatstart = mutable.Set.empty[Int] // start pos for Pat.Var names inside val patterns
       // start pos for vals with patterns -> last Pat.Var name
@@ -82,6 +83,11 @@ trait TextDocumentOps {
         if (ssym != Symbols.None) occurrences.update(mpos, (ssym, role))
       def addOccurrence(mpos: m.Position, gsym: g.Symbol, role: Role): Unit =
         addOccurrenceFromSemantic(mpos, gsym.toSemantic, role)
+      def addDefTreeRange(gpos: g.Position): Unit =
+        if (gpos != null && gpos.isRange) {
+          defTreeRanges.update(gpos.point, gpos.toMeta.toRange)
+          defTreeRanges.update(gpos.start, gpos.toMeta.toRange)
+        }
 
       def addSamOccurrence(gt: g.Function) = getSyntheticSAMClass(gt).foreach { sam =>
         val gsym = gt.symbol
@@ -308,7 +314,9 @@ trait TextDocumentOps {
             def tryMend(pos: Int): Unit = success(mends.get(pos), gsym)
 
             gtree match {
-              case _: g.DefTree => trySymbolDefinition(gsym)
+              case _: g.DefTree =>
+                trySymbolDefinition(gsym)
+                addDefTreeRange(gpos)
               case _ =>
             }
 
@@ -651,7 +659,10 @@ trait TextDocumentOps {
           map <- Iterator(occurrences, mpatoccurrences, samoccurrences)
           (pos, (sym, role)) <- map
           flatSym <- sym.asMulti
-        } buf += s.SymbolOccurrence(Some(pos.toRange), flatSym, role)
+        } {
+          val enclosing = if (role == Role.DEFINITION) defTreeRanges.get(pos.start) else None
+          buf += s.SymbolOccurrence(Some(pos.toRange), flatSym, role, enclosing)
+        }
         buf.result()
       }
 

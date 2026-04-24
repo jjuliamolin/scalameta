@@ -11,7 +11,12 @@ trait OccurrencePrinter extends BasePrinter with RangePrinter {
     opt(occ.range)(pprint)
     opt(": ", doc.substring(occ.range))(out.print)
     pprint(occ.role)
-    out.println(occ.symbol)
+    out.print(occ.symbol)
+    occ.enclosingRange.foreach { er =>
+      out.print(" enclosing ")
+      pprint(er)
+    }
+    out.println()
   }
 
   def pprint(role: Role): Unit = role match {
